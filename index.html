@@ -6,13 +6,29 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
   <title>Weather Forecast</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('button').on('click', function() {
+        var city = $('input').val();
+        var url = 'http://api.openweathermap.org/data/2.5/weather?q=';
+        url += $('input').val();
+        url += '?id=524901&appid=a9171f358b37aa79bce98e5b83933104';
+        $.get(url, function(res) {
+          var fahrTemp = res.main.temp * 1.8 - 459.67;
+          $('form h1').text(res.name);
+          $('form h2').text('Temperature: ' + Math.round(fahrTemp));
+        }, 'json');
+      })
+    })
+  </script>
 </head>
 <body>
+  <h1>My Weather Forecast App!</h1>
   <form action="#">
     <input type="text" name="city">
     <button type="button" name="button">Search Weather</button>
-    <h1>City</h1>
-    <h2>Temp</h2>
+    <h1></h1>
+    <h2></h2>
   </form>
 </body>
 </html>
